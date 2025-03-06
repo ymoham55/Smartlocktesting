@@ -1,4 +1,4 @@
-name: SmartLock Testing
+name: Run Tests
 
 on:
   push:
@@ -9,23 +9,31 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Setup .NET
+      - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '8.0'
 
-      - name: Restore Dependencies
+      - name: List files in repository for debugging
+        run: |
+          echo "Listing all files in the repository"
+          ls -R
+
+      - name: Navigate to the SmartLockTests directory
+        run: cd Smartlocktesting/SmartLockTests
+
+      - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build Project
-        run: dotnet build --configuration Release
+      - name: Build the project with detailed logs
+        run: dotnet build --configuration Release --verbosity detailed
 
-      - name: Run Tests
-        run: dotnet test --logger trx
+      - name: Run tests with detailed logs
+        run: dotnet test --configuration Release --verbosity detailed
