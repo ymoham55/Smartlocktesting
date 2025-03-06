@@ -24,16 +24,13 @@ jobs:
       - name: List files in repository for debugging
         run: |
           echo "Listing all files in the repository"
-          ls -R
-
-      - name: Navigate to the SmartLockTests directory
-        run: cd Smartlocktesting/SmartLockTests
+          ls -R # Recursively list files and directories
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj
 
       - name: Build the project with detailed logs
-        run: dotnet build --configuration Release --verbosity detailed
+        run: dotnet build ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
 
       - name: Run tests with detailed logs
-        run: dotnet test --configuration Release --verbosity detailed
+        run: dotnet test ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
