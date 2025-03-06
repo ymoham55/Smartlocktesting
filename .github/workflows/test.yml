@@ -1,4 +1,4 @@
-name: Run Tests
+name: .NET Core Build and Test
 
 on:
   push:
@@ -13,24 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0'
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0'
 
-      - name: List files in repository for debugging
-        run: |
-          echo "Listing all files in the repository"
-          ls -R # Recursively list files and directories
+    - name: List files in the repository (for debugging)
+      run: |
+        echo "Listing files in the repository"
+        ls -R
 
-      - name: Restore dependencies
-        run: dotnet restore ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj
+    - name: Restore dependencies
+      run: |
+        cd SmartLocktests
+        dotnet restore SmartLocktests.csproj
 
-      - name: Build the project with detailed logs
-        run: dotnet build ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
+    - name: Build project
+      run: |
+        cd SmartLocktests
+        dotnet build SmartLocktests.csproj --configuration Release --verbosity detailed
 
-      - name: Run tests with detailed logs
-        run: dotnet test ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
+    - name: Run tests
+      run: |
+        cd SmartLocktests
+        dotnet test SmartLocktests.csproj --configuration Release --verbosity detailed
