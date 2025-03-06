@@ -27,10 +27,10 @@ jobs:
           ls -R # Recursively list files and directories
 
       - name: Restore dependencies
-        run: dotnet restore ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj
+        run: dotnet restore ./SmartlockTests/SmartLockTests.csproj
 
       - name: Build the project with detailed logs
-        run: dotnet build ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
+        run: dotnet build ./SmartlockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
 
       - name: Run tests with detailed logs
-        run: dotnet test ./Smartlocktesting/SmartLockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
+        run: dotnet test ./SmartlockTests/SmartLockTests.csproj --configuration Release --verbosity detailed
