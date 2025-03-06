@@ -27,21 +27,6 @@ jobs:
         ls -R
 
     - name: Restore dependencies
-<<<<<<< HEAD
-      run: |
-        cd SmartLocktests
-        dotnet restore SmartLocktests.csproj
-
-    - name: Build project
-      run: |
-        cd SmartLocktests
-        dotnet build SmartLocktests.csproj --configuration Release --verbosity detailed
-
-    - name: Run tests
-      run: |
-        cd SmartLocktests
-        dotnet test SmartLocktests.csproj --configuration Release --verbosity detailed
-=======
       run: dotnet restore ./SmartLocktests/SmartLockTests.csproj
 
     - name: Build project
@@ -49,4 +34,3 @@ jobs:
 
     - name: Run tests
       run: dotnet test ./SmartLocktests/SmartLockTests.csproj --configuration Release --verbosity detailed
->>>>>>> a8e8d6fb5fa087fa38d44fa90280d41596452b5a
